@@ -1,0 +1,29 @@
+{% for first_key, first_value in result.items %}
+<table border=1>
+  {% if first_value.items|length != 1 %}
+    <tr><td colspan="2" bgcolor="yellow">{{first_key}}</td></tr>
+    {% for second_key, second_value in first_value.items %}
+      {% if second_value.items|length != 0 %}
+        <tr><td colspan="2" bgcolor="red">{{second_key}}</td></tr>
+        {% for third_key, third_value in second_value.items %}
+          <tr>
+          <td>{{third_key}}</td>
+          <td>{{third_value}}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+        <td>{{second_key}}</td>
+        <td>{{second_value}}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <tr>
+    <td bgcolor="yellow">{{first_key}}</td>
+    <td>{{first_value}}</td>
+    </tr>
+  {% endif %}
+</table>  
+<br/>
+{% endfor %}
