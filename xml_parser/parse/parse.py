@@ -1,4 +1,10 @@
 from xml.etree.ElementTree import parse
+import collections
+
+def key_cmp(x, y):
+    x_num = int(x[0].split('_')[1])
+    y_num = int(y[0].split('_')[1])
+    return cmp(x_num, y_num)
 
 def parser(file):
     tree = parse(file)
@@ -27,5 +33,5 @@ def parser(file):
             result[first_level_name] = first_level_result
         else: 
             result[first_level_name] = first_level.text
-
-    return result
+    sorted_result = collections.OrderedDict(sorted(result.items(),cmp=key_cmp))
+    return sorted_result
